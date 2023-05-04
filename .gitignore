@@ -1,0 +1,13 @@
+# APP
+app/node_modules
+app/dist
+app/build
+app/out
+app/.next
+
+# SERVICE
+service/node_modules
+service/dist
+service/build
+service/out
+service/.env

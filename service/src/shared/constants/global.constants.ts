@@ -1,0 +1,2 @@
+export const SERVICE_PORT = process.env.SERVICE_PORT ? Number.parseInt(process.env.SERVICE_PORT) : 3999;
+export const GAME_SERVICE_PORT = process.env.GAME_SERVICE_PORT ? Number.parseInt(process.env.GAME_SERVICE_PORT) : 3009;
