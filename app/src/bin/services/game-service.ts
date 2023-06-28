@@ -1,17 +1,10 @@
 import { Client, Room } from 'colyseus.js';
+import { Options } from '@colyseus/loadtest';
 
-export class GameService {
-
-    static client = new Client(process.env.WS_GAME_SERVICE_URL ?? '');
-
-    static async connectToRoom(name: string): Promise<Room<unknown> | undefined> {
-        try {
-            const room = await this.client.joinOrCreate(name);
-            return room;
-        } catch (error: any) {
-            console.log(`Game server error code: ${error['code']}. Message: ${error['message']}`);
-        }
-
-    }
+export async function GameService(options: Options): Promise<Room> {
+    const client = new Client(process.env.GAME_SERVICE_URL ?? null);
+    const room: Room = await client.joinOrCreate(options.roomName);
+    return room;
 }
 
+// cli(awaitGameService);

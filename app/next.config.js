@@ -5,9 +5,8 @@ const nextConfig = {
   images: {
     domains: [''],
   },
-  env: {
-    WS_GAME_SERVICE_URL: 'ws://localhost:3009'
-  }
+  webpack: (config, { }) => { return config },
+  env: { GAME_SERVICE_URL: 'ws://localhost:3009' },
 }
 
 module.exports = nextConfig

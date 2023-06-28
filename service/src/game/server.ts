@@ -6,19 +6,13 @@ import { MainRoomService } from './rooms';
 import { GAME_SERVICE_PORT } from '../shared/constants';
 import { Logger } from '@nestjs/common';
 
-export const initGameServer = async () => {
+export const GameServer = async () => {
+    const transport = new WebSocketTransport({ server: http.createServer() });
+    const presence = new RedisPresence();
+    const gameServer = new Server({ transport, presence });
 
-    const gameServer = new Server({
-        transport: new WebSocketTransport({ server: http.createServer() }),
-        presence: new RedisPresence()
-    });
-
-    gameServer.define('main_room', MainRoomService,{map:'mp_land'});
-
-    if (process.env.NODE_END !== 'production') gameServer.simulateLatency(200);
-
+    gameServer.define('main_room', MainRoomService, { map: 'mp_land' });
+    if (process.env.NODE_END !== 'production') gameServer.simulateLatency(60);
     await gameServer.listen(GAME_SERVICE_PORT);
-
     Logger.log(`[MAIN] Game service running on port: ${GAME_SERVICE_PORT} 🎲`);
-
 }
